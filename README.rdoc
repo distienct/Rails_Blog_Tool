@@ -1,28 +1,19 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+##Blog Features:
 
-Things you may want to cover:
+#Homepage
 
-* Ruby version
+- Site Navigation Bar on each page, with drop-down for Post Categories and user Log In / Sign Up / Log Out
 
-* System dependencies
+- Image carousel to highlight news/updates/features
 
-* Configuration
+- Recent blog posts featured
 
-* Database creation
+#Creating Post
 
-* Database initialization
+#Viewing Post
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+- Includes Liking, Favouriting, UpVoting
+- File Attachment previews: working on it
+- Comment box for other viewers
