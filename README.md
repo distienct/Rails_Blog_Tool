@@ -1,8 +1,8 @@
 == README
 
-##Blog Features:
+#Blog Features:
 
-#Homepage
+##Homepage
 
 - Site Navigation Bar on each page, with drop-down for Post Categories and user Log In / Sign Up / Log Out
 
@@ -10,9 +10,9 @@
 
 - Recent blog posts featured
 
-#Creating Post
+##Creating Post
 
-#Viewing Post
+##Viewing Post
 
 - Includes Liking, Favouriting, UpVoting
 - File Attachment previews: working on it
