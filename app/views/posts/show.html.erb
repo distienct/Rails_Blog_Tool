@@ -1,0 +1,136 @@
+<div class="body">
+  <div class="row">
+    <div class="col-md-7">
+      <h1> <%= @post.title %></h1>
+      <h4>Created on: <%= formatted_date(@post.created_at) %>
+        <% if @post.user %>
+          by <%= @post.user.full_name %>
+        <% end %></h4>
+      <h5> <%= @post.body %> </h5>
+
+        <div id="options">
+          <% if can?(:edit, @post) %>
+
+            [Post Options]
+            <%= link_to "Edit", edit_post_path(@post) %> ::
+              <% end %>
+
+          <% if can?(:destroy, @post) %>
+            <%= link_to "Delete", post_path(@post), method: :delete, data: {confirm: "Are you sure you wanto delete this?"} %>
+          <% end %>
+
+            <div class="breaker"></div>
+
+          Collaborator(s):
+          <ul>
+            <% @post.collaborating_users.each do |user| %>
+              <li><%= user.full_name %></li>
+            <% end %>
+          </ul>
+
+            <div class="breaker"></div>
+
+          <% if @post.likes.length == 1 %>
+            <%= @post.likes.length %> Like,
+          <% else %>
+            <%= @post.likes.length %> Likes,
+          <% end %>
+
+          Vote Popularity: <%= @post.vote_result %>
+      </div>
+
+      <div class="button-options">
+        <table>
+          <tr>
+            <td>
+              <% if @post.liked_by?(current_user) %>
+              <%= button_to "☹", post_like_path(@post, @like), method:  :delete,  :class => 'button likes' %>
+              <% else %>
+              <%= button_to "♥︎", post_likes_path(@post), method:   :post, :class   => 'button likes' %>
+              <% end %>
+
+              <% if @vote.nil? %>
+                <td>
+                  <%= button_to "⬆︎", post_votes_path(@post, {vote:   {is_up: true}}),    method: :post, :class => 'button vote' %>
+                <td>
+                  <%= button_to "⬇︎", post_votes_path(@post, {vote:   {is_up:     false}}), method: :post, :class => 'button vote' %>
+
+              <% elsif @vote.is_up? %>
+                <td>
+                  <%= button_to "⬆︎", post_vote_path(@post, @vote), method: :delete,    :class => 'button vote-up', :id => 'up' %>
+                <td>
+                  <%= button_to "⬇︎", post_vote_path(@post, @vote), method: :patch,     :class => 'button vote' %>
+
+              <% else %>
+                <td>
+                  <%= button_to "⬆︎", post_vote_path(@post, @vote), method: :patch,     :class => 'button vote' %>
+                <td>
+                  <%= button_to "⬇︎", post_vote_path(@post, @vote), method: :delete,    :class => 'button vote-down', :id => 'down' %>
+                <% end %>
+
+              <% if can? :edit, @post  %>
+                <td>
+                  <%= button_to "Leave", post_collaboration_path(@post, @collaboration), method: :delete, :class => 'button-long join' %>
+              <% else %>
+                <td>
+                  <%= button_to "Join", post_collaborations_path(@post), method: :post, :class => 'button-long leave' %>
+              <% end %>
+            </tr>
+          </table>
+      </div>
+    </div>
+
+    <div class="col-md-5">
+      <div class="comment-form">
+
+        <% if @comment.errors.any? %>
+          <ul>
+            <% @comment.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        <% end %>
+
+        <h3>Submit a comment:</h3>
+          <table>
+            <%= form_for [@post, @comment] do |f| %>
+            <tr>
+              <td>
+                <%= f.text_area :body, :size => "50x8" %>
+            </tr>
+          </table>
+              <%= f.submit 'Comment!' %>
+            <% end %>
+      </div>
+
+      <div class="comments">
+
+        <h2>Comments</h2>
+
+        <% @post.comments.each do |comment| %>
+          <div class="row comment-post">
+            <div class="col-md-2">
+              <%#= image_tag url_here, :class => "avatar" %>
+              <%= comment.user.full_name %>
+            </div>
+            <div class="col-md-10">
+              <div id="comment-post">
+                <p><%= comment.body %></p>
+                Posted on: <%= formatted_date(comment.created_at) %>
+
+                  <div class="breaker"></div>
+
+                <% if can?(:delete, comment) %>
+                  <div id="deletion">
+                    <%= link_to ">> Delete Comment", post_comment_path(@post, comment), method: :delete, data: {confirm: "Are you sure?"} %>
+                  </div>
+                <% end %>
+                  <div class="breaker"></div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+<%# Ability to list all the posts in the app
+On the listing page there should be a link to visit the post display page
+
+Edit and Delete links %>
+<div class="body">
+	<h1>Posts Index</h1>
+
+	<% @posts.each do |post| %>
+
+		<h3><%= link_to post.title, post_path(post) %></h3>
+
+		<div id="options">
+			<% if can?(:edit, @post) %>
+
+				[Post Options]
+				<%= link_to "Edit", edit_post_path(@post) %> ::
+			<% end %>
+
+			<% if can?(:destroy, @post) %>
+				<%= link_to "Delete", post_path(@post), method: :delete, data: {confirm: "Are you sure you wanto delete this?"} %>
+			<% end %>
+		</div>
+		<div class="break"></div>
+		<% end %>
+	<%= paginate @posts %>
+</div>

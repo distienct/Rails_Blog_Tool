@@ -1,0 +1,20 @@
+<table>
+<%= form_for @post do |f| %>
+
+<tr>
+	<td><%= f.label :category %>
+	<td><%= f.collection_select :category_id, Category.all, :id, :title  %>
+</tr>
+	<tr>
+		<td><%= f.label :title %>
+		<td><%= f.text_field :title %>
+	</tr>
+	<tr>
+		<td><%= f.label :body %>
+		<td><%= f.text_area :body, :size => '50x10' %>
+	</tr>
+	<tr>
+
+</table>
+	<%= f.submit 'Submit!', :class => 'submit-button' %>
+<% end %>

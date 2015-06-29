@@ -1,0 +1,43 @@
+<div id="index-carousel" class="carousel slide" data-ride="carousel" data-interval="2500">
+  <ol class="carousel-indicators">
+    <li data-target="about" data-slide-to="0" class="active"></li>
+    <li data-target="new_post_path" data-slide-to="1"></li>
+    <li data-target="posts_path" data-slide-to="2"></li>
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner">
+    <div class="item active">
+      <%= image_tag("w1.png", size: "1800x400") %>
+      <div class="carousel-caption">
+          <h3>This is a blog about many different things</h3>
+      </div>
+    </div>
+    <div class="item">
+      <%= image_tag("w2.jpg", size: "1800x400") %>
+      <div class="carousel-caption">
+          <h3>Learn about current events and interesting thoughts</h3>
+      </div>
+    </div>
+    <div class="item">
+      <%= image_tag("w3.jpg", size: "1800x400") %>
+      <div class="carousel-caption">
+          <h3>Our users have many ideas to share!</h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="body posts">
+  <h2>Recent Posts</h2>
+  <div class="row">
+      <% @posts.recent_three.each do |p| %>
+        <div class="col-md-4 recent-six">
+          <h3><%= link_to p.title, post_path(p) %></h3>
+          <p>
+            <%= p.body %>
+          </p>
+        </div>
+        <% end %>
+      </div>
+</div>

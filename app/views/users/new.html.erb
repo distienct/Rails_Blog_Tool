@@ -1,0 +1,40 @@
+<h1>Register</h1>
+
+<% if @user.errors.any? %>
+	<ul>
+		<% @user.errors.full_messages.each do |msg| %>
+		<li><%= msg %></li>
+	</ul>
+	<% end %>
+<% end %>
+
+<table>
+<%= form_for @user do |f| %>
+<tr>
+<td><%= f.label :first_name %>
+<td><%= f.text_field :first_name %>
+</tr>
+
+<tr>
+<td><%= f.label :last_name%>
+<td><%= f.text_field :last_name %>
+</tr>
+
+<tr>
+<td><%= f.label :email %>
+<td><%= f.text_field :email %>
+</tr>
+
+<tr>
+<td><%= f.label :password %>
+<td><%= f.password_field :password %>
+</tr>
+
+<tr>
+<td><%= f.label :password_confirmation, "Re-type PW" %>
+<td><%= f.password_field :password_confirmation %>
+</tr>
+</table>
+<%= f.submit %>
+
+<% end %>

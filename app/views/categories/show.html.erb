@@ -1,0 +1,19 @@
+<div class="body">
+	<div class="row">
+		<div class="col-md-7">
+			<h1>Category: <%= @category.title %></h1>
+			<h3>There are <%= @posts.length %> posts.</h3>
+
+			<% @posts.each do |post| %>
+			<ul>
+				<li>
+					<b><%= link_to post.title, post_path(post) %></b>
+				</li>
+					<div class="break"></div>
+				<%= post.body %>
+			</ul>
+				<div class="break"></div>
+			<% end %>
+		</div>
+	</div>
+</div>

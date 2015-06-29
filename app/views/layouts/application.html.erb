@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Blog</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+</head>
+
+<div class="container-fluid">
+  <body>
+    <div class="row">
+      <div class="col-md-6 header-text">
+        <h5>t h i s &nbsp;i s &nbsp;a &nbsp;b l o g</h5>
+      </div>
+      <div class="col-md-6 header-link">
+        <ul class="nav navbar-nav header-row">
+          <li><%= link_to "HOME", root_path  %></li>
+
+          <li><%= link_to "ABOUT", about_path %></li>
+
+          <li><%= link_to "NEW POST", new_post_path %></li>
+
+          <li><%= link_to "ALL POSTS", posts_path %></li>
+
+          <li class="dropdown">
+            <a href="posts_path" class="dropdown-toggle" data-toggle="dropdown" role="button">POSTS CATEGORIES <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <% @categories.each do |c| %>
+                <li><%= link_to c.title, category_path(c) %></li>
+              <% end %>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 user">
+        <% if session[:user_id] %>
+          Hi <%= current_user.full_name %>
+      <!--    <ul>
+            <li class="dropdown">
+              <a href="edit_users_path" class="dropdown-toggle" data-toggle="dropdown" role="button"><i class="glyphicon glyphicon-user"><span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><%= link_to "Edit Info", edit_users_path %></li>
+                  <li><%= link_to "Logout", sessions_path, method: :delete, data: {confirm: "are you sure you want to log out?"}%></li>
+                </ul>
+            </li>
+          </ul>
+        <% else %>
+          Hello, Guest!
+          <ul>
+            <li class="dropdown">
+              <a href="edit_users_path" class="dropdown-toggle" data-toggle="dropdown" role="button"><i class="glyphicon glyphicon-user"><span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><%= link_to "Sign In", new_session_path %></li>
+                  <li><%= link_to "Register", new_user_path %></li>
+                </ul>
+            </li>
+          </ul>
+        <% end %>-->
+      </div>
+    </div>
+  </div>
+
+
+  <% if flash[:notice] %>
+  <div class="alert alert-success" role="alert"><%= flash[:notice] %></div>
+  <% elsif flash[:alert] %>
+  <div class="alert alert-danger" role="alert"><%= flash[:alert] %></div>
+  <% end %>
+
+  <%= yield %>
+
+
+  </body>
+
+  </html>
