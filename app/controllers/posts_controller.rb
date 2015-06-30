@@ -3,7 +3,8 @@ class PostsController < ApplicationController
 	before_action :find_post, only: [:edit, :update, :destroy, :show]
 
 	before_action :authenticate_user!, except: [:index, :show]
-	before_action :authorize, only: [:edit, :update, :destroy]
+	before_action :authorize, only: [:edit]
+	before_action :authorize_delete, only: [:destroy]
 
 	def index
 		@posts = Post.page(params[:page]).per(8).order("id ASC")
@@ -56,7 +57,10 @@ private
 	end
 
 	def authorize
-    redirect_to root_path, alert: "Access denied." unless can? :manage, @post
+    redirect_to root_path, alert: "Access denied." unless can? :edit, @post
   end
 
+	def authorize_delete
+		redirect_to post_path(@post), alert: "Access denied" unless can? :destroy, @post
+	end
 end

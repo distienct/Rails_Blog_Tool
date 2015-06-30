@@ -2,16 +2,16 @@
 
 ##Homepage
 
-### Site Navigation Bar:
+#### Site Navigation Bar:
 	- On each page
 	- Adding nested Drop-down for Post Index and Post Categories
 	- User Log In / Sign Up / Log Out
 
-### Image carousel
+#### Image carousel
 	- highlight news/updates/features
 	- Will implement clicking on image to link to parts of site
 
-### Recent blog posts featured
+#### Recent blog posts featured
 	- Working on: Link in title and file preview on hover
 
 ##Creating Post

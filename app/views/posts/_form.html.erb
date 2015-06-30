@@ -1,20 +1,35 @@
-<table>
-<%= form_for @post do |f| %>
+<%= simple_form_for @post do |f| %>
+	<div class="form-group">
+		<%= f.input :title %>
+	</div>
 
-<tr>
-	<td><%= f.label :category %>
-	<td><%= f.collection_select :category_id, Category.all, :id, :title  %>
-</tr>
-	<tr>
-		<td><%= f.label :title %>
-		<td><%= f.text_field :title %>
-	</tr>
-	<tr>
-		<td><%= f.label :body %>
-		<td><%= f.text_area :body, :size => '50x10' %>
-	</tr>
-	<tr>
+	<div class="form-group">
+		<%= f.input :body %>
+	</div>
 
-</table>
-	<%= f.submit 'Submit!', :class => 'submit-button' %>
+	<div class="form-group">
+  	<%#= f.input :image %>
+	</div>
+
+	<div class="form-group">
+  	<%= f.label :category %>
+  	<%= f.collection_select :category_id, Category.all, :id, :title,html: {class: "form-control"}  %>
+  </div>
+
+	<div class="form-group">
+  	<%#= f.label :tag_ids %>
+  	<%#= f.collection_check_boxes :tag_ids, Tag.all, :id, :name  %>
+  </div>
+
+	<div class="form-group">
+  	<%= f.label "Collaborators" %>
+	</div>
+	<div class="check-boxes">
+  	<% users = @post.persisted? ? User.where(["id != ?",@post.user.id]) : User.where(["id != ?", current_user.id]) %>
+  	<%= f.collection_check_boxes :collaborating_user_ids, users, :id,:full_name %>
+  </div>
+
+	<div>
+  	<%= f.submit "Submit!", :class => "submit-button" %>
+	</div>
 <% end %>

@@ -13,7 +13,7 @@ class Ability
     end
 
     can :manage, Comment do |comment|
-      comment.user == user
+      comment.user == user || post.collaborating_users.include?(user)
     end
   end
 end

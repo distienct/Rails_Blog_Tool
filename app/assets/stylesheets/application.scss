@@ -6,6 +6,7 @@
   h5 {
     color: #0079a3;
     font-size: 35pt;
+    letter-spacing: 15px;
     margin-top: 25px;
     margin-bottom:5px;
     padding-top: 0px;
@@ -36,7 +37,9 @@
 .avatar {
   border-radius: 50%;
 }
-
+h1, h2, h3, h4 {
+  font-weight: lighter;
+}
 .body {
    padding-left: 10px;
    padding-right: 10px;
@@ -106,4 +109,82 @@
   margin-bottom: 20px;
   padding-bottom: 15px;
   border-bottom: 1px dotted #0079a3;
+}
+
+/*Simple Form Styling*/
+.form-group label {
+  display: block;
+  font-size: 16pt;
+  font-family: Arial;
+  font-weight: lighter;
+  color: #074c62;
+  text-align: left;
+  margin-right: 10px;
+}
+
+.form-group input {
+  padding: 5px;
+  margin-bottom: 10px;
+  background-color: #ececec;
+  border: 3px solid #0079a3;
+  border-radius: 10px;
+  width: 650px;
+  height: 40px;
+}
+
+.form-group textarea {
+  padding: 5px;
+  margin-bottom: 10px;
+  background-color: #ececec;
+  border: 3px solid #0079a3;
+  border-radius: 10px;
+  width: 650px;
+  height: 120px;
+}
+
+#post_category_id {
+  width: 325px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: #0079a3;
+  color: #FFFFFF;
+  font-weight: lighter;
+  text-transform: uppercase;
+}
+.form-control {
+  font-size: 14pt;
+  font-weight: lighter;
+  color: #999999;
+  background-color: #0079a3;
+  border-radius: 10px;
+}
+.check-boxes label {
+  background-color: #0079a3;
+  height: 40px;
+  padding: 5px;
+  border-radius: 10px;
+  margin-right: 8px;
+  color: #FFFFFF;
+  font-weight: lighter;
+  text-transform: uppercase;
+  .collection_check_boxes {
+    margin-left: 10px;
+    margin-right: 15px;
+    height: 30px;
+  }
+}
+.submit-button {
+  width: auto;
+  height: 40px;
+  margin-top: 35px;
+  margin-left: 5px;
+  padding-top: 0px;
+  padding-left: 5px;
+  padding-bottom: 5px;
+  border-radius: 5px;
+  color: #333333;
+  font-size: 18pt;
+  font-weight: lighter;
+  text-align: center;
+  background-color: #aaff77;
 }
