@@ -1,0 +1,14 @@
+<% if @comment.errors.any? %>
+	<ul>
+		<% @comment.errors.full_messages.each do |msg| %>
+			<li><%= msg %></li>
+		<% end %>
+	</ul>
+	<% end %>
+
+<h3>Submit a comment:</h3>
+<%= simple_form_for [@post, @comment] do |f| %>
+	<%= f.text_area :body, :size => "50x8" %>
+	<div class="breaker"></div>
+		<%= f.submit 'Comment!', :class => "submit-button" %>
+<% end %>

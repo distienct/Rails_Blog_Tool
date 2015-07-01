@@ -1,0 +1,30 @@
+<h2>Comments</h2>
+
+<% @post.comments.each do |comment| %>
+	<div class="row comment-post">
+		<div class="col-md-3">
+		<% if comment.user.avatar.present? %>
+			<%= image_tag comment.user.avatar.url(:square_thumb), :class => "img-circle" %>
+			<% else %>
+				<%= image_tag ("tree.png"), :class => "avatar" %>
+		<% end %>
+			<div class="breaker"></div>
+		<%= comment.user.full_name %>
+		</div>
+		<div class="col-md-9">
+			<div id="comment-post">
+				<p><%= comment.body %></p>
+				Posted on: <%= formatted_date(comment.created_at) %>
+
+					<div class="breaker"></div>
+
+				<% if can?(:delete, comment) %>
+					<div id="deletion">
+						<%= link_to ">> Delete Comment", post_comment_path(@post, comment), method: :delete, data: {confirm: "Are you sure?"} %>
+					</div>
+				<% end %>
+					<div class="breaker"></div>
+			</div>
+		</div>
+	</div>
+<% end %>

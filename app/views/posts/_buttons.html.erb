@@ -1,0 +1,55 @@
+	<% if @post.liked_by?(current_user) %>
+		<div class="button-select">
+			<%= button_to "☹", post_like_path(@post, @like), method:  :delete,  :class => 'button likes' %>
+		</div>
+	<% else %>
+		<div class="button-select">
+			<%= button_to "♥︎", post_likes_path(@post), method:   :post, :class   => 'button likes' %>
+		</div>
+	<% end %>
+
+	<% if @post.favourited_by?(current_user)%>
+  	<div class="button-select">
+			<%= button_to "★", post_favourite_path(@post,@favourite), method: :delete, :class =>'button fave'  %>
+		</div>
+  <% else %>
+    <div class="button-select">
+			<%= button_to "☆", post_favourites_path(@post), method: :post, :class =>'button fave' %>
+    </div>
+	<% end %>
+
+	<% if @vote.nil? %>
+		<div class="button-select">
+			<%= button_to "⬆︎", post_votes_path(@post, {vote:   {is_up: true}}),    	method: :post, :class => 'button vote' %>
+		</div>
+		<div class="button-select">
+			<%= button_to "⬇︎", post_votes_path(@post, {vote:   {is_up:     	false}}), method: :post, :class => 'button vote' %>
+		</div>
+
+	<% elsif @vote.is_up? %>
+		<div class="button-select">
+			<%= button_to "⬆︎", post_vote_path(@post, @vote), method: :delete,    	:class => 'button vote-up', :id => 'up' %>
+		</div>
+		<div class="button-select">
+			<%= button_to "⬇︎", post_vote_path(@post, @vote), method: :patch,     	:class => 'button vote' %>
+		</div>
+
+	<% else %>
+		<div class="button-select">
+			<%= button_to "⬆︎", post_vote_path(@post, @vote), method: :patch,     	:class => 'button vote' %>
+		</div>
+		<div class="button-select">
+			<%= button_to "⬇︎", post_vote_path(@post, @vote), method: :delete,    	:class => 'button vote-down', :id => 'down' %>
+		</div>
+	<% end %>
+
+	<% if can? :edit, @post  %>
+		<div class="button-select">
+			<%= button_to "Leave", post_collaboration_path(@post, 	@collaboration), method: :delete, :class => 'button-long join' %>
+		</div>
+
+	<% else %>
+		<div class="button-select">
+			<%= button_to "Join", post_collaborations_path(@post), method: :post, :class => 'button-long leave' %>
+		</div>
+	<% end %>

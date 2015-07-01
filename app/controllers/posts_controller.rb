@@ -1,7 +1,6 @@
 class PostsController < ApplicationController
 
 	before_action :find_post, only: [:edit, :update, :destroy, :show]
-
 	before_action :authenticate_user!, except: [:index, :show]
 	before_action :authorize, only: [:edit]
 	before_action :authorize_delete, only: [:destroy]
@@ -15,7 +14,6 @@ class PostsController < ApplicationController
 	end
 
 	def create
-		post_params = params.require(:post).permit([:title, :body, :category_id, {tag_ids: []}])
 		@post = Post.new(post_params)
 		@post.user = current_user
 
@@ -30,6 +28,7 @@ class PostsController < ApplicationController
 		@comment = Comment.new
 		@like = @post.like_for(current_user)
 		@vote = @post.vote_for(current_user)
+		@favourite = @post.favourite_for(current_user)
 		@collaboration = @post.collaborating_users
 	end
 
@@ -37,7 +36,6 @@ class PostsController < ApplicationController
 	end
 
 	def update
-		post_params = params.require(:post).permit([:title, :body, :category_id, {tag_ids: []}])
 		if @post.update(post_params)
 			redirect_to post_path(@post), notice: "Post has been updated"
 		else
@@ -51,6 +49,10 @@ class PostsController < ApplicationController
 	end
 
 private
+
+	def post_params
+		post_params = params.require(:post).permit([:title, :body, :category_id, {tag_ids: []}])
+	end
 
 	def find_post
 		@post = Post.find params[:id]

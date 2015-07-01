@@ -24,8 +24,7 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-# Use ActiveModel has_secure_password
- gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
 
 gem 'kaminari'
 
@@ -40,6 +39,13 @@ gem 'faker'
 gem 'cancancan'
 
 gem 'simple_form'
+
+gem 'carrierwave'
+gem 'mini_magick'
+
+gem 'delayed_job_active_record'
+gem 'delayed_job_web'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
@@ -48,6 +54,8 @@ gem 'simple_form'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'pry'
+  gem 'pry-rails'
   gem 'byebug'
 
   # Access an IRB console on exception pages or by using <%= console %> in views

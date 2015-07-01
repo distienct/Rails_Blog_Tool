@@ -1,0 +1,48 @@
+<% if @user.errors.any? %>
+	<ul>
+		<% @user.errors.full_messages.each do |msg| %>
+		<li><%= msg %></li>
+	</ul>
+	<% end %>
+<% end %>
+
+<%= simple_form_for @user, url: user_path, html: {class: "form-horizontal"} do |f| %>
+	<div class="form-group">
+		<%= f.input :first_name, input_html: {placeholder: "e.g. Carlos"} %>
+	</div>
+
+	<div class="form-group">
+		<%= f.input :last_name %>
+	</div>
+
+	<div class="form-group">
+  	<%= f.input :email %>
+	</div>
+
+	<div class="form-group">
+  	<%= f.input :avatar %>
+	</div>
+
+	<div class="form-group">
+    <% if @user.persisted? %>
+      <p style="font-style: italic">You must enter the password for changed to take effect</p>
+      <%= f.input :current_password %>
+    <% end %>
+  </div>
+
+	<div class="form-group">
+  	<% if @user.persisted? %>
+    	<p style="font-style: italic">Leave empty to keep the password the same</p>
+  	<% end %>
+  	<%= f.input :password %>
+	</div>
+
+	<div class="form-group">
+  	<%= f.input :password_confirmation %>
+	</div>
+
+	<div>
+  	<%= f.submit class: "submit-button" %>
+	</div>
+
+<% end %>
