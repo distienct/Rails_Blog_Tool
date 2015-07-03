@@ -19,4 +19,8 @@ class ImageUploader < CarrierWave::Uploader::Base
   version :square_thumb do
     process :resize_to_fill => [45,45]
   end
+
+  version :resized_image do
+    process :resize_to_fill => [300,300]
+  end
 end

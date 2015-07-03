@@ -26,9 +26,16 @@
         <%= render "info" %>
       </div>
 
-      <div class="button-options">
-        <%= render "buttons" %>
+      <div class="container">
+        <div class="button-options">
+          <%= render "buttons" %>
+        </div>
       </div>
+
+      <div class="post-image">
+        <%= image_tag @post.image.url(:resized_image) %>
+      </div>
+
     </div>
 
     <div class="col-md-5">

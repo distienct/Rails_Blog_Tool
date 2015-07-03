@@ -54,6 +54,7 @@ h1, h2, h3, h4 {
   }
   .button-options {
     height: auto;
+    padding: 25px;
     .button-select {
       display: inline-block;
       float: left;
@@ -123,7 +124,11 @@ h1, h2, h3, h4 {
   padding-bottom: 15px;
   border-bottom: 1px dotted #0079a3;
 }
-
+.post-image {
+  display: block;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
 /*Simple Form Styling*/
 .form-group label {
   display: block;

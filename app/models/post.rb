@@ -1,5 +1,7 @@
 class Post < ActiveRecord::Base
 
+	mount_uploader :image, ImageUploader
+
 	belongs_to :category
 	belongs_to :user
 
@@ -14,7 +16,7 @@ class Post < ActiveRecord::Base
 
 	has_many :favourites, dependent: :destroy
 	has_many :favouriting_users, through: :favourites, source: :user
-	
+
 	has_many :collaborations, dependent: :destroy
 	has_many :collaborating_users, through: :collaborations, source: :user
 
