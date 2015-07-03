@@ -20,26 +20,26 @@
 
 	<% if @vote.nil? %>
 		<div class="button-select">
-			<%= button_to "⬆︎", post_votes_path(@post, {vote:   {is_up: true}}),    	method: :post, :class => 'button vote' %>
+			<%= button_to "⬆︎", post_votes_path(@post, {vote: {is_up: true}}), method: :post, :class => 'button vote' %>
 		</div>
 		<div class="button-select">
-			<%= button_to "⬇︎", post_votes_path(@post, {vote:   {is_up:     	false}}), method: :post, :class => 'button vote' %>
+			<%= button_to "⬇︎", post_votes_path(@post, {vote: {is_up: false}}), method: :post, :class => 'button vote' %>
 		</div>
 
 	<% elsif @vote.is_up? %>
 		<div class="button-select">
-			<%= button_to "⬆︎", post_vote_path(@post, @vote), method: :delete,    	:class => 'button vote-up', :id => 'up' %>
+			<%= button_to "⬆︎", post_vote_path(@post, @vote), method: :delete, :class => 'button vote-up', :id => 'up' %>
 		</div>
 		<div class="button-select">
-			<%= button_to "⬇︎", post_vote_path(@post, @vote), method: :patch,     	:class => 'button vote' %>
+			<%= button_to "⬇︎", post_vote_path(@post, @vote, {vote: {is_up: false}}), method: :patch, :class => 'button vote' %>
 		</div>
 
 	<% else %>
 		<div class="button-select">
-			<%= button_to "⬆︎", post_vote_path(@post, @vote), method: :patch,     	:class => 'button vote' %>
+			<%= button_to "⬆︎", post_vote_path(@post, @vote, {vote: {is_up: true}}), method: :patch, :class => 'button vote' %>
 		</div>
 		<div class="button-select">
-			<%= button_to "⬇︎", post_vote_path(@post, @vote), method: :delete,    	:class => 'button vote-down', :id => 'down' %>
+			<%= button_to "⬇︎", post_vote_path(@post, @vote), method: :delete, :class => 'button vote-down', :id => 'down' %>
 		</div>
 	<% end %>
 

@@ -46,6 +46,7 @@ gem 'mini_magick'
 gem 'delayed_job_active_record'
 gem 'delayed_job_web'
 
+gem 'animate-rails'
 # Use Unicorn as the app server
 # gem 'unicorn'
 
@@ -57,7 +58,7 @@ group :development, :test do
   gem 'pry'
   gem 'pry-rails'
   gem 'byebug'
-
+  gem "letter_opener"
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 
