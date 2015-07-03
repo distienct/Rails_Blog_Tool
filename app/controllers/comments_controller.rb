@@ -12,7 +12,7 @@ class CommentsController < ApplicationController
 			if @comment.save
 				CommentsMailer.delay.notify_post_owner(@comment)
 				format.html { redirect_to post_path(@post), notice: 	"Comment created!" }
-				format.js { render }
+				format.js
 			else
 				format.html { render "/posts/show" }
 				format.js { render :create_failure }
@@ -26,7 +26,7 @@ class CommentsController < ApplicationController
 		@comment.destroy
 		respond_to do |format|
 			format.html { redirect_to post_path(@post), notice: "Comment deleted." }
-			format.js { render }
+			format.js { render :destroy }
 		end
 	end
 
