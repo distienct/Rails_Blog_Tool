@@ -1,0 +1,16 @@
+<div class="body">
+	<h1><%= @user.full_name %></h1>
+
+	<h3>Recent 5 Posts Created:</h3>
+		<ol>
+			<% @user.recent_five_made.each do |post| %>
+				<li><%= link_to post.title, post_path(post) %></li>
+			<% end %>
+		</ol>
+
+	<h3>Recent 5 Posts Joined</h3>
+		<ol>
+			<% @user.recent_five_joins.each do |post| %>
+				<li><%= link_to post.title, post_path(post) %></li>
+			<% end %>
+		</ol>

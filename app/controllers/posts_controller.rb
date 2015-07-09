@@ -1,9 +1,8 @@
 class PostsController < ApplicationController
 
 	before_action :find_post, only: [:edit, :update, :destroy, :show]
-
 	before_action :authenticate_user!, except: [:index, :show]
-	before_action :authorize, only: [:edit, :update, :destroy]
+	before_action :authorize, only: [:edit]
 
 	def index
 		@posts = Post.page(params[:page]).per(8).order("id ASC")
@@ -14,7 +13,6 @@ class PostsController < ApplicationController
 	end
 
 	def create
-		post_params = params.require(:post).permit([:title, :body, :category_id, {tag_ids: []}])
 		@post = Post.new(post_params)
 		@post.user = current_user
 
@@ -29,6 +27,7 @@ class PostsController < ApplicationController
 		@comment = Comment.new
 		@like = @post.like_for(current_user)
 		@vote = @post.vote_for(current_user)
+		@favourite = @post.favourite_for(current_user)
 		@collaboration = @post.collaborating_users
 	end
 
@@ -36,7 +35,6 @@ class PostsController < ApplicationController
 	end
 
 	def update
-		post_params = params.require(:post).permit([:title, :body, :category_id, {tag_ids: []}])
 		if @post.update(post_params)
 			redirect_to post_path(@post), notice: "Post has been updated"
 		else
@@ -45,18 +43,26 @@ class PostsController < ApplicationController
 	end
 
 	def destroy
+		authorize_delete
 		@post.destroy
 		redirect_to posts_path, notice: "Post Deleted"
 	end
 
 private
 
+	def post_params
+		post_params = params.require(:post).permit([:title, :body, :category_id, {tag_ids: []}, :image])
+	end
+
 	def find_post
 		@post = Post.find params[:id]
 	end
 
 	def authorize
-    redirect_to root_path, alert: "Access denied." unless can? :manage, @post
+    redirect_to root_path, alert: "Access denied." unless can? :edit, @post
   end
 
+	def authorize_delete
+		redirect_to post_path(@post), alert: "Access denied" unless can? :destroy, @post
+	end
 end

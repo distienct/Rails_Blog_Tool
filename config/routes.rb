@@ -1,11 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :users, except: [:edit, :update] do
-    get :edit, on: :collection
-
-    patch :update, on: :collection
-
-  end
+  resources :users
 
   resources :categories
 
@@ -13,6 +8,7 @@ Rails.application.routes.draw do
     resources :comments
     resources :likes, only: [:create, :destroy]
     resources :votes, only: [:create, :destroy, :update]
+    resources :favourites, only: [:create, :destroy]
     resources :collaborations
   end
 
@@ -23,5 +19,8 @@ Rails.application.routes.draw do
     root "homes#home"
 
     get "/about" => "homes#about"
+
+    match "/delayed_job" => DelayedJobWeb, :anchor => false, via: [:get, :post]
+
 
   end

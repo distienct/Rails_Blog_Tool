@@ -1,0 +1,13 @@
+<% if @comment.errors.any? %>
+	<ul>
+		<% @comment.errors.full_messages.each do |msg| %>
+			<li><%= msg %></li>
+		<% end %>
+	</ul>
+	<% end %>
+
+<%= simple_form_for [@post, @comment], :remote => true do |f| %>
+	<%= f.text_area :body, :size => "50x8" %>
+	<div class="breaker"></div>
+		<%= f.submit 'Comment!', :class => "submit-button" %>
+<% end %>

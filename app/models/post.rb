@@ -1,5 +1,7 @@
 class Post < ActiveRecord::Base
 
+	mount_uploader :image, ImageUploader
+
 	belongs_to :category
 	belongs_to :user
 
@@ -12,6 +14,9 @@ class Post < ActiveRecord::Base
 	has_many :taggings, dependent: :destroy
 	has_many :tags, through: :taggings
 
+	has_many :favourites, dependent: :destroy
+	has_many :favouriting_users, through: :favourites, source: :user
+
 	has_many :collaborations, dependent: :destroy
 	has_many :collaborating_users, through: :collaborations, source: :user
 
@@ -21,12 +26,21 @@ class Post < ActiveRecord::Base
 
 	scope :recent_three, lambda { order("updated_at DESC").limit(3) }
 
+
 	def liked_by?(user)
 		likes.where(user: user).present?
 	end
 
 	def like_for(user)
 		likes.find_by_user_id(user)
+	end
+
+	def favourited_by?(user)
+		favourites.where(user: user).present?
+	end
+
+	def favourite_for(user)
+		favourites.find_by_user_id(user)
 	end
 
 	def vote_for(user)
