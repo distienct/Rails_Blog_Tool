@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  
+
   protect_from_forgery with: :exception
   before_action :find_category
 
@@ -19,6 +19,7 @@ class ApplicationController < ActionController::Base
 
   def find_category
     @categories = Category.all
+    sdfsdf
+      test    
   end
-
 end
